@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>todo list app</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="top-container">
+        <h3>My Todo List For Today</h3>
+        <div class="input-groups">
+          <input id="inp" type="text" />
+          <button id="btn-add">Add</button>
+        </div>
+        <div class="task-groups">
+          <ul id="task-ul"></ul>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let inputEl = document.getElementById("inp");
+      let btnEl = document.getElementById("btn-add");
+      let ulEl = document.getElementById("task-ul");
+      // let delBtn = document.querySelectorAll(".del-btn");
+      let taskList = [];
+
+    //   localStorage.setItem("tasks", JSON.stringify(taskList));
+      let storedTasks = localStorage.getItem("tasks");
+      if (storedTasks) {
+        taskList = JSON.parse(storedTasks);
+        render(taskList);
+      }
+
+      btnEl.addEventListener("click", function () {
+        let inputValue = inputEl.value;
+        taskList.push(inputValue);
+        localStorage.setItem("tasks", JSON.stringify(taskList));
+        // console.log(taskList);
+        render(taskList);
+        inputEl.value = ''
+      });
+
+      function render(list) {
+        var tagHt = "";
+        for (let i = 0; i < list.length; i++) {
+          tagHt += `<li> ${list[i]} <button class='del-btn' data-index = '${i}'> X </button> </li >`;
+        }
+        // console.log(tagHt)
+        ulEl.innerHTML = tagHt;
+      }
+      ulEl.addEventListener("click", function (e) {
+        if (e.target.classList.contains("del-btn")) {
+          let index = e.target.dataset.index;
+          taskList.splice(index, 1);
+          localStorage.setItem("tasks", JSON.stringify(taskList));
+          render(taskList);
+        }
+      });
+    </script>
+  </body>
+</html>
