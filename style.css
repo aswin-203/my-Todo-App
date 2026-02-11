@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container {
+    display:flex ;
+    justify-content: center;
+    padding:50px ;
+    
+    width: 400px;
+    margin: 60px auto;
+    background-color: rgb(14, 13, 13);
+    min-height: 400px;
+    border-radius: 20px;
+    color: white;
+}
+.title {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: blueviolet;
+}
+.input-group{
+    display: flex;
+    justify-content: center;
+    align-items:center ;
+}
+ #inp {
+    margin-left:20px;
+    width: 200px;
+    padding: 5px;
+    border: none;
+    border-radius: 20px;
+    margin-right: 5px;
+}
+.add {
+    padding: 4px 8px;
+    border: none;
+    border-radius: 4px;
+    background-color: blueviolet;
+    color: white;
+}
+li {
+    list-style: none;
+    /* background-color: orangered; */
+    font-size: 1.2rem;
+}
+.task-groups {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.del-btn {
+    background-color: red;
+    padding: 5px;
+    color: white;
+    height: 30px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    width: 30px;
+    border: none;
+    border-radius: 50%;
+}
+.del-btn:hover {
+    background-color: rgb(252, 46, 46);
+}
+.edit-btn {
+    background-color: yellow;
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+    color: red;
+    font-weight: 600;
+}
+.edit-btn:hover {
+    background-color: rgb(212, 212, 5);
+    color: rgb(251, 74, 74);
+}
