@@ -1,80 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DM+Sans:wght@300;400;500&display=swap');
+
+:root {
+    --bg-page: #f0ebe1;
+    --bg-card: #faf7f2;
+    --bg-card-inner: #f5f0e8;
+    --ink: #1c1a17;
+    --ink-light: #5a5550;
+    --ink-faint: #c4bcb0;
+    --accent: #c0392b;
+    --accent-hover: #a93226;
+    --accent-soft: #fdecea;
+    --gold: #d4a017;
+    --gold-hover: #b8890f;
+    --line: #e0d8cc;
+    --shadow: rgba(80, 60, 40, 0.12);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+body {
+    background-color: var(--bg-page);
+    background-image:
+        radial-gradient(ellipse at 20% 50%, rgba(212, 160, 23, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(192, 57, 43, 0.05) 0%, transparent 50%);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 60px 20px;
+}
+
 .container {
-    display:flex ;
-    justify-content: center;
-    padding:50px ;
-    
-    width: 400px;
-    margin: 60px auto;
-    background-color: rgb(14, 13, 13);
-    min-height: 400px;
-    border-radius: 20px;
-    color: white;
+    width: 100%;
+    max-width: 460px;
+    background: var(--bg-card);
+    border-radius: 4px 16px 16px 4px;
+    box-shadow:
+        -4px 0 0 0 var(--accent),
+        0 8px 40px var(--shadow),
+        0 2px 8px rgba(80, 60, 40, 0.08);
+    padding: 44px 40px 48px;
+    position: relative;
+    animation: slideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Subtle ruled-line texture on card */
+.container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 31px,
+        var(--line) 31px,
+        var(--line) 32px
+    );
+    border-radius: inherit;
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+.top-container {
+    position: relative;
+    z-index: 1;
+}
+
+/* ── Title ── */
 .title {
-    font-size: 1.8rem;
-    margin-bottom: 30px;
-    color: blueviolet;
+    font-family: 'Caveat', cursive;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+    line-height: 1;
 }
-.input-group{
+
+.title::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+    margin-top: 10px;
+    margin-bottom: 28px;
+}
+
+/* ── Input Row ── */
+.input-groups {
     display: flex;
-    justify-content: center;
-    align-items:center ;
-}
- #inp {
-    margin-left:20px;
-    width: 200px;
-    padding: 5px;
-    border: none;
-    border-radius: 20px;
-    margin-right: 5px;
-}
-.add {
-    padding: 4px 8px;
-    border: none;
-    border-radius: 4px;
-    background-color: blueviolet;
-    color: white;
-}
-li {
-    list-style: none;
-    /* background-color: orangered; */
-    font-size: 1.2rem;
-}
-.task-groups {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
+    gap: 10px;
     align-items: center;
 }
-.del-btn {
-    background-color: red;
-    padding: 5px;
-    color: white;
-    height: 30px;
-    margin-left: 20px;
-    margin-bottom: 20px;
-    margin-right: 10px;
-    width: 30px;
-    border: none;
-    border-radius: 50%;
+
+#inp {
+    flex: 1;
+    padding: 11px 16px;
+    border: 1.5px solid var(--line);
+    border-radius: 10px;
+    background: var(--bg-card-inner);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
-.del-btn:hover {
-    background-color: rgb(252, 46, 46);
+
+#inp::placeholder {
+    color: var(--ink-faint);
+    font-style: italic;
 }
-.edit-btn {
-    background-color: yellow;
-    padding: 5px;
+
+#inp:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.1);
+}
+
+.add {
+    padding: 11px 20px;
     border: none;
     border-radius: 10px;
-    color: red;
-    font-weight: 600;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(192, 57, 43, 0.25);
+    white-space: nowrap;
 }
+
+.add:hover {
+    background: var(--accent-hover);
+    box-shadow: 0 4px 14px rgba(192, 57, 43, 0.35);
+}
+
+.add:active {
+    transform: scale(0.97);
+}
+
+/* ── Task List ── */
+.task-groups {
+    margin-top: 28px;
+}
+
+#task-ul {
+    display: flex;
+    flex-direction: column;
+}
+
+li {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 0;
+    border-bottom: 1px dashed var(--line);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--ink);
+    animation: taskIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes taskIn {
+    from { opacity: 0; transform: translateX(-12px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+/* ── Delete Button ── */
+.del-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: var(--ink-faint);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+    line-height: 1;
+}
+
+.del-btn:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+    transform: scale(1.15);
+}
+
+.del-btn:active {
+    transform: scale(0.95);
+}
+
+/* ── Edit Button ── */
+.edit-btn {
+    padding: 5px 12px;
+    border: 1.5px solid var(--gold);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--gold);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    flex-shrink: 0;
+    letter-spacing: 0.3px;
+    transition: background 0.2s, color 0.2s, transform 0.1s;
+}
+
 .edit-btn:hover {
-    background-color: rgb(212, 212, 5);
-    color: rgb(251, 74, 74);
+    background: var(--gold);
+    color: #fff;
+    transform: scale(1.05);
+}
+
+.edit-btn:active {
+    transform: scale(0.97);
 }
